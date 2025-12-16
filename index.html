@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TON Account Inspector | Web3 Explorer</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -176,6 +178,34 @@
         </div>
     </section>
 
+    <!-- Suppress browser extension errors -->
+    <script>
+        // Suppress console errors from browser extensions
+        (function() {
+            const originalError = console.error;
+            console.error = function(...args) {
+                const errorString = args.join(' ');
+                // Filter out errors from browser extensions
+                if (errorString.includes('content-script-start.js') || 
+                    errorString.includes('endsWith') ||
+                    errorString.includes('wrappedSendMessageCallback')) {
+                    return; // Suppress these errors
+                }
+                // Allow other errors through
+                originalError.apply(console, args);
+            };
+            
+            // Also catch unhandled promise rejections from extensions
+            window.addEventListener('unhandledrejection', function(event) {
+                const errorString = event.reason?.toString() || '';
+                if (errorString.includes('content-script-start.js') || 
+                    errorString.includes('endsWith') ||
+                    errorString.includes('wrappedSendMessageCallback')) {
+                    event.preventDefault(); // Suppress these errors
+                }
+            });
+        })();
+    </script>
     <script src="main.js"></script>
 </body>
 </html>
