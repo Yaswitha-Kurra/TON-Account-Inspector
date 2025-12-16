@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TON Account Inspector | Web3 Explorer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-icon">⚡</div>
+                <h1>TON Account Inspector</h1>
+                <p class="hero-subtitle">
+                    Instantly inspect any TON blockchain address. Get real-time account status, 
+                    balance, contract type, and activity information with a single click.
+                </p>
+                <a href="#inspector" class="cta-button">
+                    <span>Try It Now</span>
+                    <span class="cta-icon">↓</span>
+                </a>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">Real-time</div>
+                        <div class="stat-label">Live Data</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Free to Use</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">Instant</div>
+                        <div class="stat-label">Results</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What You Can Inspect</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Account Status</h3>
+                    <p>Check if an account is active, frozen, or uninitialized. Know the exact state of any TON address instantly.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Balance Information</h3>
+                    <p>View precise TON balance in real-time. See exactly how much TON is stored in any wallet or contract.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Contract Type</h3>
+                    <p>Identify wallet types (v1, v2, v3, v4) and smart contracts. Understand what kind of account you're inspecting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Activity History</h3>
+                    <p>See the last activity timestamp for any account. Track when addresses were last used on the blockchain.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Explorer Links</h3>
+                    <p>Quick access to full account details on Tonviewer. Jump to comprehensive blockchain explorer views.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Powered by TonAPI for instant results. No delays, no waiting - get information in milliseconds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Try It Out Section -->
+    <section class="try-it-out" id="inspector">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Try It Out</h2>
+                <p class="section-subtitle">Enter any TON address below to inspect it</p>
+            </div>
+
+            <div class="input-section">
+                <div class="input-group">
+                    <label for="address-input">
+                        <span class="label-icon">🔗</span>
+                        Enter TON Address
+                    </label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="text" 
+                            id="address-input" 
+                            placeholder="EQD... or 0:..."
+                            autocomplete="off"
+                        >
+                        <button id="inspect-btn" onclick="inspectAddress()">
+                            <span>Inspect</span>
+                            <span class="btn-icon">→</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" class="loading hidden">
+                <div class="spinner-wrapper">
+                    <div class="spinner"></div>
+                    <div class="spinner-ring"></div>
+                </div>
+                <p>Scanning blockchain...</p>
+            </div>
+
+            <div id="error" class="error hidden"></div>
+
+            <div id="results" class="results hidden">
+                <div class="results-header">
+                    <h2>Account Details</h2>
+                    <div class="status-badge" id="status-badge"></div>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-row">
+                        <div class="label-group">
+                            <span class="label-icon-small">📊</span>
+                            <span class="label">Account Status</span>
+                        </div>
+                        <span id="account-status" class="value"></span>
+                    </div>
+                    
+                    <div class="info-row highlight">
+                        <div class="label-group">
+                            <span class="label-icon-small">💰</span>
+                            <span class="label">TON Balance</span>
+                        </div>
+                        <span id="balance" class="value balance-value"></span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="label-group">
+                            <span class="label-icon-small">🔐</span>
+                            <span class="label">Contract Type</span>
+                        </div>
+                        <span id="contract-type" class="value"></span>
+                    </div>
+                    
+                    <div class="info-row">
+                        <div class="label-group">
+                            <span class="label-icon-small">⏱️</span>
+                            <span class="label">Last Activity</span>
+                        </div>
+                        <span id="last-tx" class="value"></span>
+                    </div>
+                    
+                    <div class="info-row explorer-row">
+                        <div class="label-group">
+                            <span class="label-icon-small">🌐</span>
+                            <span class="label">View on Explorer</span>
+                        </div>
+                        <a id="explorer-link" href="#" target="_blank" class="explorer-link">
+                            <span>Open in Tonviewer</span>
+                            <span class="link-icon">↗</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>
