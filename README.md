@@ -97,8 +97,6 @@ Executes a get method on a contract (read-only, no gas cost).
 
 ## 🚀 How to Run
 
-### Option 1: Simple HTTP Server (Recommended)
-
 1. **Navigate to the project directory:**
    ```bash
    cd ton-account-inspector
@@ -131,22 +129,6 @@ Executes a get method on a contract (read-only, no gas cost).
    http://localhost:8000
    ```
 
-### Option 2: Open Directly (Limited)
-
-You can open `index.html` directly in your browser, but some browsers may block API requests due to CORS. Using a local server is recommended.
-
-## 📝 Usage
-
-1. Open the application in your browser
-2. Enter a TON address in the input field (format: `EQD...` or `0:...`)
-3. Click "Inspect" or press Enter
-4. View the account information displayed below
-
-### Example Addresses to Test
-
-- **Active Wallet**: `EQD__________________________________________0vo` (Testnet zero address)
-- **Your Wallet**: Use your own TON wallet address
-- **Smart Contract**: Any deployed TON smart contract address
 
 ## 🎓 Key Concepts Explained
 
@@ -168,33 +150,7 @@ Get methods are read-only functions on smart contracts that don't cost gas. They
 - `get_data`: Returns contract data
 - `get_balance`: Returns contract balance
 
-## 🔧 Optional Improvements
 
-Here are some enhancements you could add (keep the core simple first!):
-
-1. **Address Validation**: Add regex validation for TON address format
-2. **Address Format Conversion**: Support both raw (`0:...`) and user-friendly (`EQD...`) formats
-3. **Transaction History**: Show more than just the last transaction
-4. **Contract Interface Detection**: Show which specific wallet version or contract interface
-5. **Copy to Clipboard**: Add buttons to copy address, transaction hash, etc.
-6. **Dark Mode**: Add a theme toggle
-7. **Error Handling**: More detailed error messages for different failure cases
-8. **Caching**: Cache results to avoid repeated API calls
-9. **Multiple Addresses**: Support inspecting multiple addresses at once
-10. **Export Results**: Download results as JSON
-
-## 🐛 Troubleshooting
-
-### CORS Errors
-If you see CORS errors, make sure you're running a local server (not opening the file directly).
-
-### API Rate Limits
-TonAPI has rate limits. If you hit them, wait a moment and try again.
-
-### Address Not Found
-- Verify the address format is correct
-- Check if you're using mainnet vs testnet addresses
-- Some addresses may not exist yet
 
 ## 📚 Learning Resources
 
@@ -202,11 +158,3 @@ TonAPI has rate limits. If you hit them, wait a moment and try again.
 - [TonAPI Documentation](https://tonapi.io/docs)
 - [TON Address Format](https://docs.ton.org/learn/overviews/addresses)
 - [TON Account States](https://docs.ton.org/learn/overviews/accounts)
-
-## 📄 License
-
-This is a learning project. Feel free to use and modify as needed.
-
----
-
-**Happy Learning! 🚀**
